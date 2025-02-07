@@ -6,4 +6,4 @@ from .find_scenes import *
 
 import ee
 #ee.Authenticate() ## assume ee use is authenticated in current environment
-ee.Initialize(opt_url='https://earthengine-highvolume.googleapis.com')
+#ee.Initialize(opt_url='https://earthengine-highvolume.googleapis.com')
