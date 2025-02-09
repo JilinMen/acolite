@@ -116,27 +116,27 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
     if settings['output_scale'] is not None: scale = settings['output_scale']
 
     # #if (limit is not None) & (settings['subset_aot']) & (settings['run_hybrid_tact']):
-    # if (limit is not None):
-    #     if settings['strict_subset']:
-    #         ## determin strict lat/lon rectangle box
-    #         region = ee.Geometry.BBox(limit[1], limit[0], limit[3], limit[2])
-    #     else:
-    #         ## determine image bounding box
-    #         imx = []
-    #         imy = []
-    #         for ii in [[1,0], [1,2], [3,0], [3,2]]:
-    #             ## make point geometry
-    #             pt = ee.Geometry.Point([limit[ii[0]], limit[ii[1]]])
-    #
-    #             ## get pixel coordinates in x/y
-    #             tmp = ee.Image.clip(i.pixelCoordinates(i.select(tar_band).projection()),pt)
-    #             ret = ee.Image.reduceRegion(tmp, ee.Reducer.toList()).getInfo()
-    #             imx.append(ret['x'][0])
-    #             imy.append(ret['y'][0])
-    #
-    #         ## use pixel coordinates from image to make new subset
-    #         eesub = ee.List([min(imx), min(imy), max(imx), max(imy)])
-    #         region = ee.Geometry.Rectangle(eesub, p, True, False)
+    if (limit is not None):
+        if settings['strict_subset']:
+            ## determin strict lat/lon rectangle box
+            region = ee.Geometry.BBox(limit[1], limit[0], limit[3], limit[2])
+        else:
+            ## determine image bounding box
+            imx = []
+            imy = []
+            for ii in [[1,0], [1,2], [3,0], [3,2]]:
+                ## make point geometry
+                pt = ee.Geometry.Point([limit[ii[0]], limit[ii[1]]])
+    
+                ## get pixel coordinates in x/y
+                tmp = ee.Image.clip(i.pixelCoordinates(i.select(tar_band).projection()),pt)
+                ret = ee.Image.reduceRegion(tmp, ee.Reducer.toList()).getInfo()
+                imx.append(ret['x'][0])
+                imy.append(ret['y'][0])
+    
+            ## use pixel coordinates from image to make new subset
+            eesub = ee.List([min(imx), min(imy), max(imx), max(imy)])
+            region = ee.Geometry.Rectangle(eesub, p, True, False)
     #
     # ## subset here if local aot is to be computed
     # #if (limit is not None) & (settings['subset_aot']) & (settings['run_hybrid_tact']): i = i.clip(region)
