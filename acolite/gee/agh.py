@@ -1219,5 +1219,4 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                     print('Removing {}'.format(zfile))
                     os.remove(zfile)
 
-    return({gatts['acolite_type']:ofile,
-           'rhos':i_rhos})
+    return i_rhos
