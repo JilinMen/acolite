@@ -69,14 +69,14 @@ def agh_run(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, return_im=
         print('AGH processing finished in {:.1f} seconds'.format(t1-t0))
 
         ## run offline acolite
-        if ('l1r_gee' in ret) & ('l2r_gee' not in ret) & (setg['run_offline_dsf'] | setg['run_offline_tact']):
-            setu = ac.acolite.settings.parse(None, settings=acolite_settings, merge=False)
-            setu['inputfile'] = ret['l1r_gee']
-            if 'output' not in setu: setu['output'] = os.path.dirname(setu['inputfile'])
-            print(setu)
-            setu['atmospheric_correction'] = setg['run_offline_dsf']
-            setu['tact_run'] = setg['run_offline_tact']
-            ac.acolite.acolite_run(setu)
-            t2 = time.time()
-            print('Offline ACOLITE processing finished in {:.1f} seconds'.format(t2-t1))
+        # if ('l1r_gee' in ret) & ('l2r_gee' not in ret) & (setg['run_offline_dsf'] | setg['run_offline_tact']):
+        #     setu = ac.acolite.settings.parse(None, settings=acolite_settings, merge=False)
+        #     setu['inputfile'] = ret['l1r_gee']
+        #     if 'output' not in setu: setu['output'] = os.path.dirname(setu['inputfile'])
+        #     print(setu)
+        #     setu['atmospheric_correction'] = setg['run_offline_dsf']
+        #     setu['tact_run'] = setg['run_offline_tact']
+        #     ac.acolite.acolite_run(setu)
+        #     t2 = time.time()
+        #     print('Offline ACOLITE processing finished in {:.1f} seconds'.format(t2-t1))
     return ret
