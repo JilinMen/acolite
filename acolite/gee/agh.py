@@ -1221,7 +1221,8 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                 if os.path.exists(zfile):
                     print('Removing {}'.format(zfile))
                     os.remove(zfile)
-
-    return({gatts['acolite_type']:ofile}) 
-
-return i_rhos
+    try:
+        return({gatts['acolite_type']:ofile}) 
+    except:
+        print('can't find gatts')
+        return i_rhos
