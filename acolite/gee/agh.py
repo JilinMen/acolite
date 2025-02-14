@@ -1224,5 +1224,5 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
     try:
         return({gatts['acolite_type']:ofile}) 
     except:
-        print('can't find gatts')
+        print('return rhos')
         return i_rhos
