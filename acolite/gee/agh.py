@@ -976,7 +976,7 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
             else:
                 ## read rhot data
                 print("Print rhost_file:",rhot_files)
-                print(type(rhot_files),,num_tiles)
+                print(type(rhot_files),num_tiles)
                 print(len(rhot_files),num_tiles)
                 if len(rhot_files) == num_tiles:
                     rhot_image_file = rhot_files[ti]
