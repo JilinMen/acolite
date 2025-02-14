@@ -80,3 +80,4 @@ def agh_run(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, return_im=
             t2 = time.time()
             print('Offline ACOLITE processing finished in {:.1f} seconds'.format(t2-t1))
 
+    return ret
