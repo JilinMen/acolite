@@ -975,8 +975,8 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                         #sr_data[sr_data==0.0] = np.nan
             else:
                 ## read rhot data
-                print("Print rhost_file:",rhot_file)
-                print(type(rhot_file))
+                print("Print rhost_file:",rhot_files)
+                print(type(rhot_files),,num_tiles)
                 print(len(rhot_files),num_tiles)
                 if len(rhot_files) == num_tiles:
                     rhot_image_file = rhot_files[ti]
