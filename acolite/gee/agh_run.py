@@ -84,4 +84,5 @@ def agh_run(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, return_im=
     print("rhos_list length:", len(rhos_list))
     print("rhos_list content:", [type(img) for img in rhos_list])
     rhos_collection = ee.ImageCollection(rhos_list)
+    print(type(rhos_collection))
     return rhos_collection
