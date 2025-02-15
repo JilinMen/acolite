@@ -81,5 +81,6 @@ def agh_run(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, return_im=
         #     ac.acolite.acolite_run(setu)
         #     t2 = time.time()
         #     print('Offline ACOLITE processing finished in {:.1f} seconds'.format(t2-t1))
-
-    return ee.ImageCollection(rhos_list)
+    print("rhos_list length:", len(rhos_list))
+    rhos_collection = ee.ImageCollection(rhos_list)
+    return rhos_collection
