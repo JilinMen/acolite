@@ -67,6 +67,7 @@ def agh_run(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, return_im=
         else:
             ret = gee.agh(image, imColl, rsrd=rsrd, lutd=lutd, settings=setg)
         t1 = time.time()
+        print(type(ret))
         print('AGH processing finished in {:.1f} seconds'.format(t1-t0))
         rhos_list.append(ret)
         # # run offline acolite
