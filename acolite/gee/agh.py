@@ -1225,6 +1225,6 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
         return({gatts['acolite_type']:ofile}) 
     except:
         i_rhos.set("time_start",i.get("system:time_start"))\
-        .set("custom_id",i.get("system:id"))\
+        .set("custom_id",i.get("system:id"))
         print(type(i_rhos))
         return i_rhos
