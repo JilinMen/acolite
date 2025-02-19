@@ -1226,8 +1226,8 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
     except:
         print('time_start: ',i.get("system:time_start").getInfo())
         print('id: ',i.get("system:id").getInfo())
-        i_rhos.set("time_start",i.get("system:time_start"))\
-        .set("custom_id",i.get("system:id"))
+        i_rhos = i_rhos.set("time_start",i.get("system:time_start"))\
+                        .set("custom_id",i.get("system:id"))
         print('time_start: ',i_rhos.get("time_start").getInfo())
         print('id: ',i_rhos.get("custom_id").getInfo())
         return i_rhos
