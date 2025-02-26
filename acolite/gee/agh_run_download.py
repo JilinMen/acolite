@@ -8,7 +8,7 @@
 ##                2022-12-27 (QV) added offline TACT option
 ##                2023-06-21 (QV) use agh_old and added return_im keyword
 
-def agh_run(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, images=None, imColl=None, return_im=False, old_agh=True):
+def agh_run_download(settings={}, acolite_settings=None, rsrd = {}, lutd = {}, images=None, imColl=None, return_im=False, old_agh=True):
     import acolite as ac
     import os, time
 
