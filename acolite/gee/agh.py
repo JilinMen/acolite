@@ -579,7 +579,8 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                     i_rhos = ee.Image(rhos)
                 else:
                     i_rhos = i_rhos.addBands(rhos)
-
+                print("type before glint cor:", type(i_rhos))
+                print(i_rhos.getInfo())
             ## do atmospheric correction + glint
             if settings['glint_correction']:
                 print('Performing glint correction using bands {} {}'.format(glint_bands[0], glint_bands[1]))
@@ -610,10 +611,8 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                     ## rhos corrected for glint
                     rhos = rhos.expression('rhos - (rhog * {})'.format(glint_ave[b]), \
                                                  {'rhos': rhos.select(bname), 'rhog': glint.select('glint')})
-
-                    # 处理 NaN
-                    rhos = rhos.updateMask(rhos.neq(float('nan')))
-                    rhos = rhos.unmask(0)
+                    print("type after cor:", type(rhos))
+                    print("after glint cor:", rhos.getInfo())
                     if i_rhos is None:
                         i_rhos = ee.Image(rhos)
                     else:
