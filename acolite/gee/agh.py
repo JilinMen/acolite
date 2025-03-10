@@ -611,6 +611,9 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                     rhos = rhos.expression('rhos - (rhog * {})'.format(glint_ave[b]), \
                                                  {'rhos': rhos.select(bname), 'rhog': glint.select('glint')})
 
+                    # 处理 NaN
+                    rhos = rhos.updateMask(rhos.neq(float('nan')))
+                    rhos = rhos.unmask(0)
                     if i_rhos is None:
                         i_rhos = ee.Image(rhos)
                     else:
