@@ -595,28 +595,35 @@ def agh(image, imColl, rsrd = {}, lutd = {}, luti = {}, settings = {}):
                 glint_dict = {b:luti[sensor][model]['rgi'][b]((geometry['raa'], geometry['vza'], geometry['sza'], settings['glint_wind'], sel_aot)) for b in rsrd[sensor]['rsr_bands']}
                 glint_spec = np.asarray([glint_dict[b] for b in glint_dict])
                 glint_ave = {b: glint_dict[b]/((glint_dict[glint_bands[0]]+glint_dict[glint_bands[1]])/2) for b in glint_dict}
-                i_rhos = None
+                i_rhos_new = None
                 for b in rsrd[sensor]['rsr_bands']:
                     #if b in aot_skip_bands: continue
                     bname = 'B{}'.format(b)
 
                     ## gas and path corrected rhot
                     rhot_prime = i_rhot.expression('(rhot / {}) - {}'.format(ttg['tt_gas'][b], am[rhop_par][b]), \
-                                                   {'rhot': i_rhot.select(bname)})
+                                                {'rhot': i_rhot.select(bname)})
 
                     ## rhos not corrected for glint
                     rhos = rhot_prime.expression('(rhotp) / ({} - {} * rhotp)'.format(am['dutott'][b], am['astot'][b]), \
-                                                 {'rhotp': rhot_prime.select(bname)})
+                                                {'rhotp': rhot_prime.select(bname)})
 
                     ## rhos corrected for glint
-                    rhos = rhos.expression('rhos - (rhog * {})'.format(glint_ave[b]), \
-                                                 {'rhos': rhos.select(bname), 'rhog': glint.select('glint')})
-                    print("type after cor:", type(rhos))
-                    print("after glint cor:", rhos.getInfo())
-                    if i_rhos is None:
-                        i_rhos = ee.Image(rhos)
+                    
+                    expression = f"rhos - (rhog * {glint_ave[b]})"
+                    
+                    if "nan" in expression or "inf" in expression:
+                        pass
                     else:
-                        i_rhos = i_rhos.addBands(rhos)
+                        rhos = rhos.expression(expression,
+                                               {'rhos': rhos.select(bname), 'rhog': glint.select('glint')})
+
+                        if i_rhos_new is None:
+                            i_rhos_new = ee.Image(rhos)
+                        else:
+                            i_rhos_new = i_rhos.addBands(rhos)
+            if i_rhos_new is not None:
+                i_rhos = i_rhos_new
             rhos_info = i_rhos.getInfo()
             obands_rhos = [ib['id'] for ib in rhos_info['bands']]
 
