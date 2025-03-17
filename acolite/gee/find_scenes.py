@@ -103,7 +103,13 @@ def find_scenes(isodate_start, isodate_end=None, day_range=1,
     ## search ee collections
     imColl = None
     for coll in collections:
-        imC = ee.ImageCollection(coll).filterDate(sdate, edate)
+        if 'LANDSAT' in coll:
+            cloud_name = 'CLOUD_COVER'
+        elif 'COPERNICUS' in coll:
+            cloud_name = 'CLOUDY_PIXEL_PERCENTAGE'
+
+        imC = ee.ImageCollection(coll).filterDate(sdate, edate).filter(ee.Filter.lt(cloud_name, 50))
+
         if region is not None: imC = imC.filterBounds(region)
 
         if imColl is None:
